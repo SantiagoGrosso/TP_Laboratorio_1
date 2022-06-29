@@ -1,0 +1,211 @@
+/*
+ * ArrayPassenger.c
+ *
+ *  Created on: 11 may. 2022
+ *      Author: RYZEN 2700X
+ */
+
+#include "ArrayPassenger.h"
+
+int initPassengers(sPassenger list[], int size)
+{
+	int retorno = -1;
+
+	for(int i=0;i<size;i++)
+	{
+		list[i].isEmpty = VACIO;
+	}
+
+	return retorno;
+}
+
+////////////////////////////////////////////////////////
+
+int findPassengerById(sPassenger list[], int size,int id)
+{
+
+	int index = -1;
+
+	for(int i=0;i<size;i++)
+	{
+		if(list[i].id == id && list[i].isEmpty == OCUPADO)
+		{
+			index = i;
+			break;
+		}
+	}
+
+	return index;
+
+}
+
+////////////////////////////////////////////////////////
+
+int removePassenger(sPassenger list[], int size, int id)
+{
+	int index;
+	int aceptarEliminacion;
+	int retorno =-1;
+
+	index = findPassengerById(list, size, id);
+	if(index != -1)
+	{
+		printf("\n Vas a eliminar a este pasajero: \n"
+				"\n ID: %d \n"
+				"\n Nombre: %s \n"
+				"\n Apellido: %s \n"
+				"\n Código de vuelo: %s \n"
+				,list[index].id
+				,list[index].name
+				,list[index].lastname
+				,list[index].flycode);
+
+		printf("\n Está usted seguro que es el pasajero que quiere borrar? Si es así, ingrese 1: \n");
+		scanf("%d", &aceptarEliminacion);
+
+		if(aceptarEliminacion == 1)
+		{
+			list[index].isEmpty = VACIO;
+			retorno = 0;
+		}
+	}
+
+
+	return retorno;
+
+}
+
+////////////////////////////////////////////////////////
+
+int sortPassengers(sPassenger passengerList[], int size, int order)
+{
+	int retorno = -1;
+
+	sPassenger auxiliar;
+	for(int i=0; i<size-1; i++)
+	{
+		for(int j = i+1; j<size; j++)
+		{
+			if(strcmp(passengerList[i].lastname, passengerList[j].lastname) == order)
+			{
+				auxiliar = passengerList[i];
+				passengerList[i] = passengerList[j];
+				passengerList[j] = auxiliar;
+				retorno = 0;
+			}
+			else
+			{
+				if(strcmp(passengerList[i].lastname, passengerList[j].lastname) == 0)
+				{
+					if(order<0)
+					{
+						if(passengerList[i].idTypePassenger < passengerList[j].idTypePassenger)
+						{
+							auxiliar=passengerList[i];
+							passengerList[i]=passengerList[j];
+							passengerList[j]=auxiliar;
+
+						}
+					}
+					else
+					{
+						if(passengerList[i].idTypePassenger > passengerList[j].idTypePassenger)
+						{
+							auxiliar=passengerList[i];
+							passengerList[i]=passengerList[j];
+							passengerList[j]=auxiliar;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return retorno;
+}
+
+////////////////////////////////////////////////////////
+
+int printPassengers(sPassenger passengerList[], int size, sStatusFlight statusFlight[], sTypePassenger typePassenger[])
+{
+	int retorno=-1;
+	int indiceStatusFlight;
+	int indiceTypePassenger;
+
+	for(int i=0;i<size;i++)
+	{
+		indiceStatusFlight= MatchearIdConEstadoDeVuelo(passengerList[i], statusFlight, 4);
+		indiceTypePassenger= MatchearIdConTipoDePasajero(passengerList[i], typePassenger, 3);
+		if(passengerList[i].isEmpty == OCUPADO)
+		{
+			printf("ID: %d - "
+					"Nombre: %s |-| "
+					"Apellido: %s |-| "
+					"Precio: %.2f |-| "
+					"Código de vuelo: %s |-| "
+					"Estado de vuelo: %s |-| "
+					"Tipo de pasajero: %s"
+					"\n", passengerList[i].id,
+					passengerList[i].name,
+					passengerList[i].lastname,
+					passengerList[i].price,
+					passengerList[i].flycode,
+					statusFlight[indiceStatusFlight].statusFlight,
+					typePassenger[indiceTypePassenger].typePassenger);
+			retorno = 0;
+		}
+	}
+
+	return retorno;
+}
+
+////////////////////////////////////////////////////////
+
+int sortPassengersByCode(sPassenger passengerList[], int size, int order)
+{
+	int retorno = -1;
+
+		sPassenger auxiliar;
+		for(int i=0; i<size-1; i++)
+		{
+			for(int j = i+1; j<size; j++)
+			{
+				if(strcmp(passengerList[i].flycode, passengerList[j].flycode) == order)
+				{
+					auxiliar = passengerList[i];
+					passengerList[i] = passengerList[j];
+					passengerList[j] = auxiliar;
+					retorno = 0;
+				}
+				else
+				{
+					if(strcmp(passengerList[i].flycode, passengerList[j].flycode) == 0)
+					{
+						if(order<0)
+						{
+							if(passengerList[i].idStatusFlight < passengerList[j].idStatusFlight)
+							{
+								auxiliar=passengerList[i];
+								passengerList[i]=passengerList[j];
+								passengerList[j]=auxiliar;
+
+							}
+						}
+						else
+						{
+							if(passengerList[i].idStatusFlight > passengerList[j].idStatusFlight)
+							{
+								auxiliar=passengerList[i];
+								passengerList[i]=passengerList[j];
+								passengerList[j]=auxiliar;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return retorno;
+}
+
+

@@ -1,0 +1,12 @@
+/*
+ * StatusFlight.c
+ *
+ *  Created on: 29 jun. 2022
+ *      Author: RYZEN 2700X
+ */
+
+/// @brief Muestra la id y la descripción de los estados de vuelo.
+///
+/// @param statusFlight La estructura de estados de vuelo.
+/// @param size El tamaño de esta.
+void StatusFlight(sStatusFlight statusFlight[], int size);

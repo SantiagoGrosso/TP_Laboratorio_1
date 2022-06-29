@@ -1,0 +1,19 @@
+/*
+ * TypePassenger.h
+ *
+ *  Created on: 29 jun. 2022
+ *      Author: RYZEN 2700X
+ */
+
+#ifndef TYPEPASSENGER_H_
+#define TYPEPASSENGER_H_
+
+
+
+#endif /* TYPEPASSENGER_H_ */
+
+typedef struct
+{
+	int idTypePassenger;
+	char typePassenger[20];
+}sTypePassenger;

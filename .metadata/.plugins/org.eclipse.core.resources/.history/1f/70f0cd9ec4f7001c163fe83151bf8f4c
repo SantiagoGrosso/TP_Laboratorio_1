@@ -1,0 +1,21 @@
+/*
+ * Nexo.h
+ *
+ *  Created on: 29 jun. 2022
+ *      Author: RYZEN 2700X
+ */
+
+#ifndef NEXO_H_
+#define NEXO_H_
+
+/// @brief Para cargar un pasajero.
+	///
+	/// @param unPasajero Donde se carga el pasajero.
+	/// @param statusFlight La estructura del estado de vuelo.
+	/// @param size El tamaño de esta.
+	/// @param typePassenger La estructura del tipo de pasajero.
+	/// @param segundoSize El tamaño de esta.
+	/// @return Retorna un pasajero cargado.
+	sPassenger ingresarPasajero(sPassenger unPasajero, sStatusFlight statusFlight[], int size, sTypePassenger typePassenger[], int segundoSize);
+
+#endif /* NEXO_H_ */

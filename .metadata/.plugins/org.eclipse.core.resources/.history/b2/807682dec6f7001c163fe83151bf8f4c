@@ -1,0 +1,58 @@
+/*
+ * Nexo.c
+ *
+ *  Created on: 29 jun. 2022
+ *      Author: RYZEN 2700X
+ */
+
+
+////////////////////////////////////////////////////////
+
+int addPassenger(sPassenger unPasajero, sStatusFlight statusFlight[], int size,
+				sTypePassenger typePassenger[], int segundoSize, sPassenger list[], int tercerSize)
+{
+	int index = -1;
+
+		index = BuscarEspacioLibre(list, tercerSize);
+		if(index != -1)
+		{
+			list[index] = ingresarPasajero(unPasajero, statusFlight, size, typePassenger, segundoSize);
+		}
+
+		return index;
+}
+
+////////////////////////////////////////////////////////
+
+int printPassengers(sPassenger passengerList[], int size, sStatusFlight statusFlight[], sTypePassenger typePassenger[])
+{
+	int retorno=-1;
+	int indiceStatusFlight;
+	int indiceTypePassenger;
+
+	for(int i=0;i<size;i++)
+	{
+		indiceStatusFlight= MatchearIdConEstadoDeVuelo(passengerList[i], statusFlight, 4);
+		indiceTypePassenger= MatchearIdConTipoDePasajero(passengerList[i], typePassenger, 3);
+		if(passengerList[i].isEmpty == OCUPADO)
+		{
+			printf("ID: %d - "
+					"Nombre: %s |-| "
+					"Apellido: %s |-| "
+					"Precio: %.2f |-| "
+					"Código de vuelo: %s |-| "
+					"Estado de vuelo: %s |-| "
+					"Tipo de pasajero: %s"
+					"\n", passengerList[i].id,
+					passengerList[i].name,
+					passengerList[i].lastname,
+					passengerList[i].price,
+					passengerList[i].flycode,
+					statusFlight[indiceStatusFlight].statusFlight,
+					typePassenger[indiceTypePassenger].typePassenger);
+			retorno = 0;
+		}
+	}
+
+	return retorno;
+}

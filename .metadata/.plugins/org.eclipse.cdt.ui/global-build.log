@@ -1,0 +1,35 @@
+13:55:25 **** Rebuild of configuration Debug for project TP2 CORREGIDO ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\InputsYValidaciones.o" "..\\src\\InputsYValidaciones.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\StatusFlight.o" "..\\src\\StatusFlight.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayPassenger.o" "..\\src\\ArrayPassenger.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Nexo.o" "..\\src\\Nexo.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP2 CORREGIDO.o" "..\\src\\TP2 CORREGIDO.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TypePassenger.o" "..\\src\\TypePassenger.c" 
+gcc -o "TP2 CORREGIDO.exe" "src\\ArrayPassenger.o" "src\\InputsYValidaciones.o" "src\\Nexo.o" "src\\StatusFlight.o" "src\\TP2 CORREGIDO.o" "src\\TypePassenger.o" 
+Info: Nothing to build for TP2 CORREGIDO
+13:58:33 **** Incremental Build of configuration Debug for project TP2 CORREGIDO ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\InputsYValidaciones.o" "..\\src\\InputsYValidaciones.c" 
+..\src\InputsYValidaciones.c: In function 'ValidacionDeCaracteres':
+..\src\InputsYValidaciones.c:185:11: warning: format '%d' expects argument of type 'int', but argument 2 has type 'int *' [-Wformat=]
+  185 |  printf("%d", &validacion);
+      |          ~^   ~~~~~~~~~~~
+      |           |   |
+      |           int int *
+      |          %n
+gcc -o "TP2 CORREGIDO.exe" "src\\ArrayPassenger.o" "src\\InputsYValidaciones.o" "src\\Nexo.o" "src\\StatusFlight.o" "src\\TP2 CORREGIDO.o" "src\\TypePassenger.o" 
+13:58:47 **** Incremental Build of configuration Debug for project TP2 CORREGIDO ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\InputsYValidaciones.o" "..\\src\\InputsYValidaciones.c" 
+gcc -o "TP2 CORREGIDO.exe" "src\\ArrayPassenger.o" "src\\InputsYValidaciones.o" "src\\Nexo.o" "src\\StatusFlight.o" "src\\TP2 CORREGIDO.o" "src\\TypePassenger.o" 
+Info: Nothing to build for TP2 CORREGIDO
+13:59:41 **** Incremental Build of configuration Debug for project TP2 CORREGIDO ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\InputsYValidaciones.o" "..\\src\\InputsYValidaciones.c" 
+gcc -o "TP2 CORREGIDO.exe" "src\\ArrayPassenger.o" "src\\InputsYValidaciones.o" "src\\Nexo.o" "src\\StatusFlight.o" "src\\TP2 CORREGIDO.o" "src\\TypePassenger.o" 
+14:02:19 **** Incremental Build of configuration Debug for project TP2 CORREGIDO ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\InputsYValidaciones.o" "..\\src\\InputsYValidaciones.c" 
+gcc -o "TP2 CORREGIDO.exe" "src\\ArrayPassenger.o" "src\\InputsYValidaciones.o" "src\\Nexo.o" "src\\StatusFlight.o" "src\\TP2 CORREGIDO.o" "src\\TypePassenger.o" 
+Info: Nothing to build for TP2 CORREGIDO

@@ -1,0 +1,78 @@
+/*
+ * Passenger.h
+ *
+ *  Created on: 19 may. 2022
+ *
+ */
+
+#ifndef PASSENGER_H_
+#define PASSENGER_H_
+#include "LinkedList.h"
+
+typedef struct
+{
+	int id;
+	char nombre[50];
+	char apellido[50];
+	float precio;
+	char tipoPasajero[20];
+	char codigoVuelo[20];
+	char estadoVuelo[20];
+
+}Passenger;
+
+Passenger* Passenger_new();
+Passenger* Passenger_newParametros(char* idStr,char* nombreStr,char* codigoStr, char* apellidoStr, char* precioStr, char* tipoPasajeroStr, char* statusFlightStr);
+void Passenger_delete(Passenger* this);
+
+int Passenger_setId(Passenger* this,int id);
+int Passenger_getId(Passenger* this,int* id);
+
+int Passenger_setNombre(Passenger* this,char* nombre);
+int Passenger_getNombre(Passenger* this,char* nombre);
+
+int Passenger_setApellido(Passenger* this,char* apellido);
+int Passenger_getApellido(Passenger* this,char* apellido);
+
+int Passenger_setCodigoVuelo(Passenger* this,char* codigoVuelo);
+int Passenger_getCodigoVuelo(Passenger* this,char* codigoVuelo);
+
+int Passenger_setTipoPasajero(Passenger* this,char* tipoPasajero);
+int Passenger_getTipoPasajero(Passenger* this,char* tipoPasajero);
+
+int Passenger_setPrecio(Passenger* this,float precio);
+int Passenger_getPrecio(Passenger* this,float* precio);
+
+int Passenger_setEstadoVuelo(Passenger* this,char* estadoVuelo);
+int Passenger_getEstadoVuelo(Passenger* this,char* estadoVuelo);
+
+void printPassenger(Passenger* unPasajero);
+int printPassengerList(LinkedList* listaPasajeros);
+
+int validarGets(Passenger* unPasajero, int* id, char* nombre, char* apellido, char* tipoPasajero, float* precio, char* codigoVuelo, char* estadoVuelo);
+int validarSets(Passenger* unPasajero, int id, char* nombre, char* apellido, char* tipoPasajero, float precio, char* codigoVuelo, char* estadoVuelo);
+
+int addPassenger(LinkedList* listaPasajeros, int* id);
+int ObtenerMayorId(LinkedList* lista);
+
+int removePassenger(LinkedList* listaPasajeros);
+int buscarId(LinkedList* listaPasajeros, int id);
+
+int modifyPassenger(LinkedList* listaPasajeros);
+
+int caseNombre(LinkedList* listaPasajeros, int index, Passenger auxiliar);
+int modifyNombre(LinkedList* listaPasajeros, int index, char* nombreAuxiliar);
+
+int caseApellido(LinkedList* listaPasajeros, int index, Passenger auxiliar);
+int modifyApellido(LinkedList* listaPasajeros, int index, char* apellidoAuxiliar);
+
+int caseCodigoVuelo(LinkedList* listaPasajeros, int index, Passenger auxiliar);
+int modifyCodigoVuelo(LinkedList* listaPasajeros, int index, char* codigoVueloAuxiliar);
+
+int casePrecio(LinkedList* listaPasajeros, int index, Passenger auxiliar);
+int modifyPrecio(LinkedList* listaPasajeros, int index, float precioAuxiliar);
+
+int caseTipoPasajero(LinkedList* listaPasajeros, int index, Passenger auxiliar);
+int modifyTipoPasajero(LinkedList* listaPasajeros, int index, char* tipoPasajeroAuxiliar);
+
+#endif /* PASSENGER_H_ */

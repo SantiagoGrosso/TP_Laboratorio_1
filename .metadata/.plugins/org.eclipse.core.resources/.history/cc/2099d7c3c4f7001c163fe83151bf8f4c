@@ -1,0 +1,43 @@
+/*
+ * Nexo.h
+ *
+ *  Created on: 29 jun. 2022
+ *      Author: RYZEN 2700X
+ */
+
+#ifndef NEXO_H_
+#define NEXO_H_
+
+/// @brief Para cargar un pasajero.
+///
+/// @param unPasajero Donde se carga el pasajero.
+/// @param statusFlight La estructura del estado de vuelo.
+/// @param size El tamaño de esta.
+/// @param typePassenger La estructura del tipo de pasajero.
+/// @param segundoSize El tamaño de esta.
+/// @return Retorna un pasajero cargado.
+sPassenger ingresarPasajero(sPassenger unPasajero, sStatusFlight statusFlight[], int size, sTypePassenger typePassenger[], int segundoSize);
+
+/// @brief Añade un pasajero a la lista.
+///
+/// @param unPasajero La estructura de un pasajero cargada.
+/// @param statusFlight La estructura del estado de vuelo.
+/// @param size El tamaño de esta.
+/// @param typePassenger La estructura del tipo de pasajero.
+/// @param segundoSize El tamaño de esta.
+/// @param list La lista de pasajeros.
+/// @param tercerSize El tamaño de esta.
+/// @return Retorna si se pudo o no cargar al pasajero.
+int addPassenger(sPassenger unPasajero, sStatusFlight statusFlight[], int size,
+						 sTypePassenger typePassenger[], int segundoSize, sPassenger list[], int tercerSize);
+
+/// @brief Muestra la lista de pasajeros.
+///
+/// @param passengerList La lista de pasajeros.
+/// @param size El tamaño de esta.
+/// @param statusFlight La estructura del estado de vuelo.
+/// @param typePassenger La estructura del tipo de pasajero.
+/// @return Retorna la lista printeada.
+int printPassengers(sPassenger passengerList[], int size, sStatusFlight statusFlight[], sTypePassenger typePassenger[]);
+
+#endif /* NEXO_H_ */

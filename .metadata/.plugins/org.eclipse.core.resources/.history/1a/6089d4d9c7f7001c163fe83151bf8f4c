@@ -1,0 +1,217 @@
+/*
+ * Nexo.c
+ *
+ *  Created on: 29 jun. 2022
+ *      Author: RYZEN 2700X
+ */
+
+///////////////////////////////////////////////////
+
+sPassenger ingresarPasajero(sPassenger unPasajero, sStatusFlight statusFlight[], int size, sTypePassenger typePassenger[], int segundoSize)
+{
+	int validacion;
+
+	unPasajero.id = obtenerID();
+	CargarCadena(unPasajero.name, "\nIngrese su nombre: \n");
+	validacion = ValidacionDeCaracteres(unPasajero.name);
+	while(validacion == 0)
+	{
+		CargarCadena(unPasajero.name, "\nError, vuelva a ingresar su nombre: \n");
+		validacion = ValidacionDeCaracteres(unPasajero.name);
+	}
+	DetectarEspacio(unPasajero.name);
+	CargarCadena(unPasajero.lastname, "\nIngrese su apellido: \n");
+	validacion = ValidacionDeCaracteres(unPasajero.lastname);
+	while(validacion == 0)
+		{
+			CargarCadena(unPasajero.lastname, "\nError, vuelva a ingresar su apellido: \n");
+			validacion = ValidacionDeCaracteres(unPasajero.lastname);
+		}
+	DetectarEspacio(unPasajero.lastname);
+	unPasajero.price = IngresarFlotante("\nIngrese el precio del viaje: \n", 5000, 1000000);
+	CargarCadena(unPasajero.flycode, "\nIngrese su código de vuelo: \n");
+	StatusFlight(statusFlight, size);
+	unPasajero.idStatusFlight = IngresarEntero("\nIngrese el estado del vuelo (Del 1 al 4): \n", 1, 4);
+	TypePassenger(typePassenger, segundoSize);
+	unPasajero.idTypePassenger = IngresarEntero("\nIngrese el tipo de vuelo (Del 1 al 3): \n", 1, 3);
+	unPasajero.isEmpty = OCUPADO;
+
+
+	return unPasajero;
+}
+
+////////////////////////////////////////////////////////
+
+int addPassenger(sPassenger unPasajero, sStatusFlight statusFlight[], int size,
+				sTypePassenger typePassenger[], int segundoSize, sPassenger list[], int tercerSize)
+{
+	int index = -1;
+
+		index = BuscarEspacioLibre(list, tercerSize);
+		if(index != -1)
+		{
+			list[index] = ingresarPasajero(unPasajero, statusFlight, size, typePassenger, segundoSize);
+		}
+
+		return index;
+}
+
+////////////////////////////////////////////////////////
+
+int printPassengers(sPassenger passengerList[], int size, sStatusFlight statusFlight[], sTypePassenger typePassenger[])
+{
+	int retorno=-1;
+	int indiceStatusFlight;
+	int indiceTypePassenger;
+
+	for(int i=0;i<size;i++)
+	{
+		indiceStatusFlight= MatchearIdConEstadoDeVuelo(passengerList[i], statusFlight, 4);
+		indiceTypePassenger= MatchearIdConTipoDePasajero(passengerList[i], typePassenger, 3);
+		if(passengerList[i].isEmpty == OCUPADO)
+		{
+			printf("ID: %d - "
+					"Nombre: %s |-| "
+					"Apellido: %s |-| "
+					"Precio: %.2f |-| "
+					"Código de vuelo: %s |-| "
+					"Estado de vuelo: %s |-| "
+					"Tipo de pasajero: %s"
+					"\n", passengerList[i].id,
+					passengerList[i].name,
+					passengerList[i].lastname,
+					passengerList[i].price,
+					passengerList[i].flycode,
+					statusFlight[indiceStatusFlight].statusFlight,
+					typePassenger[indiceTypePassenger].typePassenger);
+			retorno = 0;
+		}
+	}
+
+	return retorno;
+}
+
+////////////////////////////////////////////////////////
+
+int ModificarPasajero(sPassenger list[], int size, sStatusFlight statusFlight[], int otroSize, sTypePassenger typePassenger[], int segundoSize)
+{
+	int index;
+	int id;
+	int opcion;
+	int aceptarModificacion;
+	int retorno = 0;
+
+	id= IngresarEntero("Ingrese la id del usuario a modificar: ", 1000, 3000);
+	index=findPassengerById(list, size, id);
+
+	while(index==-1)
+	{
+		id = IngresarEntero("No se ha encontrado el id, vuelva a ingresarlo: ", 1000, 3000);
+		index=findPassengerById(list, size, id);
+	}
+	do
+		{
+		int validacion;
+		char name[51];
+		char lastname[51];
+		float price;
+		char flycode[10];
+		int cambiarTypePassenger;
+
+		opcion=IngresarEntero("\nIngrese la opción según el campo del pasajero a modificar: \n"
+				"1 -- NOMBRE.\n"
+				"2 -- APELLIDO.\n"
+				"3 -- PRECIO.\n"
+				"4 -- CÓDIGO DE VUELO.\n"
+				"5 -- TIPO DE PASAJERO.\n"
+				"6 -- SALIR.\n", 1, 6);
+
+		switch(opcion)
+		{
+			case 1:
+				CargarCadena(name, "Ingrese el nuevo nombre: ");
+				validacion= ValidacionDeCaracteres(name);
+				while(validacion == 0)
+				{
+					CargarCadena(name, "Error, ingrese el nuevo nombre: ");
+					validacion= ValidacionDeCaracteres(name);
+				}
+				DetectarEspacio(name);
+				printf("\n Está usted seguro que este es el campo que quiere modificar? Si es así, ingrese 1: \n");
+				scanf("%d", &aceptarModificacion);
+				if(aceptarModificacion == 1)
+				{
+					strcpy(list[index].name, name);
+					printf("El cambio se guardó correctamente!");
+				}
+				retorno = 1;
+			break;
+
+			case 2:
+				CargarCadena(lastname, "Ingrese el nuevo apellido: ");
+				validacion= ValidacionDeCaracteres(lastname);
+				while(validacion == 0)
+				{
+					CargarCadena(lastname, "Error, ingrese el nuevo apellido: ");
+					validacion= ValidacionDeCaracteres(lastname);
+				}
+				DetectarEspacio(lastname);
+				printf("\n Está usted seguro que este es el campo que quiere modificar? Si es así, ingrese 1: \n");
+				scanf("%d", &aceptarModificacion);
+				if(aceptarModificacion == 1)
+				{
+					strcpy(list[index].lastname, lastname);
+					printf("El cambio se guardó correctamente!");
+				}
+				retorno = 1;
+			break;
+
+			case 3:
+				price = IngresarFlotante("Ingrese el nuevo precio: ", 5000, 1000000);
+				printf("\n Está usted seguro que este es el campo que quiere modificar? Si es así, ingrese 1: \n");
+				scanf("%d", &aceptarModificacion);
+				if(aceptarModificacion == 1)
+				{
+					list[index].price = price;
+					printf("El cambio se guardó correctamente!");
+				}
+				retorno = 1;
+			break;
+
+			case 4:
+				CargarCadena(flycode, "Ingrese el nuevo código de vuelo: ");
+				printf("\n Está usted seguro que este es el campo que quiere modificar? Si es así, ingrese 1: \n");
+				scanf("%d", &aceptarModificacion);
+				if(aceptarModificacion == 1)
+				{
+					strcpy(list[index].flycode, flycode);
+					printf("El cambio se guardó correctamente!");
+				}
+				retorno = 1;
+			break;
+
+			case 5:
+				TypePassenger(typePassenger, segundoSize);
+								cambiarTypePassenger = IngresarEntero("Ingrese el nuevo tipo de pasajero: ", 1, 3);
+								printf("\n Está usted seguro que este es el campo que quiere modificar? Si es así, ingrese 1: \n");
+								scanf("%d", &aceptarModificacion);
+								if(aceptarModificacion == 1)
+								{
+									list[index].idTypePassenger = cambiarTypePassenger;
+									printf("El cambio se guardó correctamente!");
+								}
+								retorno = 1;
+			break;
+
+			case 6:
+				printf("Saliendo del submenú.\n");
+			break;
+		}
+
+
+		}while (opcion != 6);
+
+	return  retorno;
+}
+
+

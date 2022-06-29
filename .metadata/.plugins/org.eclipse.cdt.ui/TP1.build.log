@@ -1,0 +1,9 @@
+11:45:29 **** Rebuild of configuration Debug for project TP1 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menu.o" "..\\src\\Menu.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Funciones.o" "..\\src\\Funciones.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Trabajo Práctico 1 - Santiago Grosso 1B.o" "..\\src\\Trabajo Práctico 1 - Santiago Grosso 1B.c" 
+gcc -o TP1.exe "src\\Funciones.o" "src\\Menu.o" "src\\Trabajo Práctico 1 - Santiago Grosso 1B.o" 
+
+11:45:30 Build Finished. 0 errors, 0 warnings. (took 1s.39ms)
+

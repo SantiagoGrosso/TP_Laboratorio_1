@@ -1,0 +1,12 @@
+/*
+ * TypePassenger.c
+ *
+ *  Created on: 29 jun. 2022
+ *      Author: RYZEN 2700X
+ */
+
+/// @brief Muestra la id y la descripción del tipo de pasajero.
+///
+/// @param typePassenger La estructura del tipo de vuelo.
+/// @param size El tamaño de esta.
+void TypePassenger(sTypePassenger typePassenger[], int size);

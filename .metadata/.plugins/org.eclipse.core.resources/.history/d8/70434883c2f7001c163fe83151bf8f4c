@@ -1,0 +1,277 @@
+
+/*
+ * ArrayPassenger.h
+ *
+ *  Created on: 11 may. 2022
+ *      Author: RYZEN 2700X
+ */
+
+#ifndef ARRAYPASSENGER_H_
+#define ARRAYPASSENGER_H_
+
+#define VACIO 1
+#define OCUPADO 0
+
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+typedef struct
+{
+	int idStatusFlight;
+	char statusFlight[20];
+}sStatusFlight;
+
+typedef struct
+{
+	int idTypePassenger;
+	char typePassenger[20];
+}sTypePassenger;
+
+typedef struct
+	{
+		int id;
+		char name[51];
+		char lastname[51];
+		float price;
+		char flycode[10];
+		int idStatusFlight;
+		int idTypePassenger;
+		int isEmpty;
+
+	}sPassenger;
+
+	/// @brief Permite pedir un flotante y validarlo.
+	///
+	/// @param mensaje Para mostrar un mensaje.
+	/// @param minimo Validar entre el mínimo.
+	/// @param maximo Validar entre el máximo.
+	/// @return Retorna un flotante.
+	float IngresarFlotante(char mensaje [], float minimo, float maximo);
+
+	/// @brief Permite pedir un entero y validarlo.
+	///
+	/// @param mensaje Para mostrar un mensaje.
+	/// @param minimo Validar entre el mínimo.
+	/// @param maximo Validar entre el máximo.
+	/// @return Retorna un entero.
+	int IngresarEntero(char mensaje [], int minimo, int maximo);
+
+	/// @brief Pide un un caracter.
+	///
+	/// @param mensaje Para mostrar un mensaje.
+	/// @return	Retorna un caracter.
+	char IngresarCaracter(char mensaje []);
+
+	/// @brief Pide la carga de un vector.
+	///
+	/// @param El vector.
+	/// @param size El tamaño del vector.
+	void CargarVector(int numeros[], int size);
+
+	/// @brief Pide la carga de una cadena.
+	///
+	/// @param cadena La cadena.
+	/// @param mensaje Para mostrar un mensaje.
+	void CargarCadena(char cadena[],char mensaje[]);
+
+	/// @brief Da el id incremental.
+	///
+	/// @return Retorna el id incremental.
+	int obtenerID();
+
+	/// @brief Busca el primer espacio libre.
+	///
+	/// @param list La lista de pasajeros.
+	/// @param size el tamaño de la lista.
+	/// @return Retorna donde hay un espacio libre.
+	int BuscarEspacioLibre(sPassenger list[], int size);
+
+	/// @brief Busca espacios y transforma en mayúscula la primera letra de los nombres.
+	///
+	/// @param NombreApellido La cadena a cambiar.
+	void DetectarEspacio (char NombreApellido []);
+
+	/// @brief Para cargar un pasajero.
+	///
+	/// @param unPasajero Donde se carga el pasajero.
+	/// @param statusFlight La estructura del estado de vuelo.
+	/// @param size El tamaño de esta.
+	/// @param typePassenger La estructura del tipo de pasajero.
+	/// @param segundoSize El tamaño de esta.
+	/// @return Retorna un pasajero cargado.
+	sPassenger ingresarPasajero(sPassenger unPasajero, sStatusFlight statusFlight[], int size, sTypePassenger typePassenger[], int segundoSize);
+
+	/// @brief Valida números para que no ingresen ni letras ni caracteres especiales.
+	///
+	/// @param numeros Pasa los números como cadena para validarlos.
+	/// @return Retorna los números validados.
+	int ValidarNumero (char numeros[]);
+
+	/// @brief Valida letras para que no ingresen ni números ni caracteres especiales.
+	///
+	/// @param cadena La cadena a validar.
+	/// @return La cadena validada.
+	int ValidacionDeCaracteres (char cadena[]);
+
+	/// @brief Incia todos los espacios en vacío, para la carga.
+	///
+	/// @param list La lista de pasajeros.
+	/// @param len El tamaño de la lista.
+	/// @return Retorna los lugares vacíos.
+	int initPassengers(sPassenger list[], int len);
+
+	/// @brief Añade un pasajero a la lista.
+	///
+	/// @param unPasajero La estructura de un pasajero cargada.
+	/// @param statusFlight La estructura del estado de vuelo.
+	/// @param size El tamaño de esta.
+	/// @param typePassenger La estructura del tipo de pasajero.
+	/// @param segundoSize El tamaño de esta.
+	/// @param list La lista de pasajeros.
+	/// @param tercerSize El tamaño de esta.
+	/// @return Retorna si se pudo o no cargar al pasajero.
+	int addPassenger(sPassenger unPasajero, sStatusFlight statusFlight[], int size,
+					 sTypePassenger typePassenger[], int segundoSize, sPassenger list[], int tercerSize);
+
+	/// @brief Busca un pasajero por ID.
+	///
+	/// @param list La lista de pasajeros.
+	/// @param len El tamaño de esta.
+	/// @param id El ID.
+	/// @return Retorna el id.
+	int findPassengerById(sPassenger list[], int len,int id);
+
+	/// @brief Para eliminar un pasajero.
+	///
+	/// @param list La lista de pasajeros.
+	/// @param len El tamaño de esta.
+	/// @param id El ID.
+	/// @return Retorna si se pudo eliminar o no el pasajero.
+	int removePassenger(sPassenger list[], int len, int id);
+
+	/// @brief Acomoda los pasajeros por apellido y tipo de pasajero.
+	///
+	/// @param passengerList La lista de pasajeros.
+	/// @param size El tamaño de esta.
+	/// @param order El orden (si ascendente o descendente).
+	/// @return Retorna ordenada la lista de manera ascendente o descendente.
+	int sortPassengers(sPassenger passengerList[], int size, int order);
+
+	/// @brief Muestra la lista de pasajeros.
+	///
+	/// @param passengerList La lista de pasajeros.
+	/// @param size El tamaño de esta.
+	/// @param statusFlight La estructura del estado de vuelo.
+	/// @param typePassenger La estructura del tipo de pasajero.
+	/// @return Retorna la lista printeada.
+	int printPassengers(sPassenger passengerList[], int size, sStatusFlight statusFlight[], sTypePassenger typePassenger[]);
+
+	/// @brief Ordena los pasajeros por el código de vuelo y si el estado es "Activo" (en horario o en curso).
+	///
+	/// @param list La lista de pasajeros.
+	/// @param len El tamaño de esta.
+	/// @param order El orden (si ascendente o descendente)
+	/// @return Retorna ordenada la lista de manera ascendente o descendente.
+	int sortPassengersByCode(sPassenger list[], int len, int order);
+
+	/// @brief Muestra la id y la descripción de los estados de vuelo.
+	///
+	/// @param statusFlight La estructura de estados de vuelo.
+	/// @param size El tamaño de esta.
+	void StatusFlight(sStatusFlight statusFlight[], int size);
+
+	/// @brief Muestra la id y la descripción del tipo de pasajero.
+	///
+	/// @param typePassenger La estructura del tipo de vuelo.
+	/// @param size El tamaño de esta.
+	void TypePassenger(sTypePassenger typePassenger[], int size);
+
+	/// @brief La función para modificar los datos del pasajero.
+	///
+	/// @param list La lista de pasajeros.
+	/// @param size El tamaño de esta.
+	/// @param statusFlight La estructura del estado de vuelo.
+	/// @param otroSize El tamaño de esta.
+	/// @param typePassenger La estructura del tipo de pasajero.
+	/// @param segundoSize El tamaño de esta.
+	/// @return Retorna la si se modificó algún dato o no.
+	int ModificarPasajero(sPassenger list[], int size, sStatusFlight statusFlight[], int otroSize, sTypePassenger typePassenger[], int segundoSize);
+
+	/// @brief Busca si hay algún espacio ocupado para que no pueda hacer nada sin cargar 1 pasajero.
+	///
+	/// @param list La lista de pasajeros.
+	/// @param size El tamaño de esta.
+	/// @return Retorna si encontró algún espacio ocupado.
+	int BuscarEspacioOcupado(sPassenger list[], int size);
+
+	/// @brief Linkea la ID del estado de vuelo con la descripción.
+	///
+	/// @param list La lista de pasajeros.
+	/// @param statusFlight La estructura del estado de vuelo.
+	/// @param size El tamaño de esta.
+	/// @return Retorna el id linkeado.
+	int MatchearIdConEstadoDeVuelo(sPassenger list,sStatusFlight statusFlight[], int size);
+
+	/// @brief Linkea la ID del tipo de pasajero con la descripción.
+	///
+	/// @param list La lista de pasajeros.
+	/// @param typePassenger La estructura del tipo de pasajero.
+	/// @param size El tamaño de esta.
+	/// @return Retorna el id linkeado.
+	int MatchearIdConTipoDePasajero(sPassenger list,sTypePassenger typePassenger[], int size);
+
+	/// @brief Muestra los listados del caso 4.
+	///
+	/// @param list La lista de pasajeros.
+	/// @param size El tamaño de la misma.
+	/// @param statusFlight La estructura del estado de vuelo.
+	/// @param segundoSize El tamaño de la misma.
+	/// @param typePassenger La estructura del tipo de pasajero.
+	/// @param tercerSize El tamaño de la misma.
+	void MostrarListados(sPassenger list[], int size, sStatusFlight statusFlight[], int segundoSize, sTypePassenger typePassenger[], int tercerSize);
+
+	/// @brief La función en que se valida si algún pasajero superó el promedio de viajes.
+	///
+	/// @param list La lista de pasajeros.
+	/// @param size El tamaño de esta.
+	/// @return Retorna si algún pasajero pudo o no superar el promedio.
+	float SuperarPromedio(sPassenger list[], int size);
+
+	/// @brief Calcula promedios.
+	///
+	/// @param acumulador La variable a ser divida.
+	/// @param contador La variable por la que se divide.
+	/// @return Retorna el promedio con la división.
+	float CalcularPromedio (float acumulador, int contador);
+
+	/// @brief Muestra los precios en base al promedio.
+	///
+	/// @param list La lista de pasajeros.
+	/// @param size El tamaño de esta.
+	/// @param statusFlight La estructura del estado de vuelo.
+	/// @param segundoSize El tamaño de esta.
+	/// @param typePassenger La estructura del tipo de pasajero.
+	/// @param tercerSize El tamaño de esta.
+	void MostrarPreciosEnBaseAlPromedio(sPassenger list[], int size, sStatusFlight statusFlight[],
+									   int segundoSize, sTypePassenger typePassenger[], int tercerSize);
+
+	/// @brief Hace la carga forzada de 5 pasajeros.
+	///
+	/// @param list La lista de pasajeros.
+	/// @param size El tamaño de esta.
+	void CargaForzada (sPassenger list[], int size);
+
+	/// @brief Muestra los vuelos que están solo en horario o en curso.
+	///
+	/// @param passengerList La lista de pasajeros.
+	/// @param size El tamaño de esta.
+	/// @param statusFlight La estructura del estado de vuelo.
+	/// @param sizeStatus El tamaño de esta.
+	/// @param typePassenger La estructura del tipo de pasajero.
+	/// @param sizeType El tamaño de esta.
+	/// @return Retorna los pasajeros en horario y en curso.
+	int MostrarEnHorarioYEnCurso(sPassenger passengerList[], int size, sStatusFlight statusFlight[],
+								 int sizeStatus, sTypePassenger typePassenger[], int sizeType);
+#endif /* ARRAYPASSENGER_H_ */
